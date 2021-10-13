@@ -1,4 +1,4 @@
-import { CARD_COLORS, CARD_VALUES, NAMES } from "./constants";
+import { CARD_COLORS, CARD_VALUES, COLORS, NAMES } from "./constants";
 
 export function init() {
     document.body.append(
@@ -158,6 +158,10 @@ div.card {
     place-items: center;
 
     flex-shrink: 0;
+
+    text-shadow: 2px 2px #000000;
+
+    user-select: none;
 }
 
 div.card p.card-value {
@@ -174,10 +178,14 @@ div.card.thicc {
 div.card.thicc p.card-value {
     font-size: 2.25rem;
 }
+
+div.card.rainbow {
+    background: #1a1a1a;
+}
 ${CARD_COLORS.map(
     (color) => /*css*/ `
 div.card.${color} {
-    background: ${color};
+    background: ${COLORS[color]};
 }`
 ).join("\n")}
 ${CARD_VALUES.map(

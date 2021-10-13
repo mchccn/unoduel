@@ -1,3 +1,5 @@
+export const CARD_TYPES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "reverse", "skip", "draw2"] as const;
+
 export const CARD_VALUES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "reverse", "skip", "draw2", "wild", "wild4"] as const;
 
 export const CARD_COLORS = ["red", "yellow", "green", "blue"] as const;
@@ -16,4 +18,11 @@ export const NAMES = {
     draw2: "draw 2",
     wild: "wild",
     wild4: "wild draw 4",
+} as const;
+
+export const COLORS = {
+    red: "#D31019",
+    yellow: "#EEC314",
+    green: "#0A852E",
+    blue: "#158BCF",
 } as const;
