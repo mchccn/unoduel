@@ -7,11 +7,13 @@ export function init() {
                 /*html*/ `
 <div class="game">
     <main class="duel-container">
-        <section class="player player-1">
+        <section class="player player-0">
             <div class="card-container">
                 <div class="card-container-pad"></div>
             </div>
         </section>
+
+        <h2 class="player-count player-count-0 left-align">0</h2>
 
         <section class="field">
             <div class="deck">
@@ -24,10 +26,13 @@ export function init() {
             </div>
         </section>
 
-        <section class="player player-2">
+        <h2 class="player-count player-count-1 right-align">0</h2>
+
+        <section class="player player-1">
             <div class="card-container">
                 <div class="card-container-pad"></div>
             </div>
+            <div class="cover"></div>
         </section>
     </main>
 </div>
@@ -122,10 +127,34 @@ body {
     display: flex;
 
     overflow: auto;
+
+    position: relative;
+}
+
+.player-count {
+    min-width: 70px;
+
+    flex-shrink: : 0;;
+
+    padding: 0.25rem;
+
+    font-size: 1rem;
+}
+
+.left-align {
+    text-align: left;
+}
+
+.right-align {
+    text-align: right;
 }
 
 .card-container {
+    width: 100%;
+
     display: flex;
+
+    align-items: center;
     
     flex-direction: column;
 
@@ -136,6 +165,8 @@ body {
 
 .card-container-pad {
     height: 0.25rem;
+
+    width: 70px;
 
     flex-shrink: 0;
 }
@@ -159,7 +190,7 @@ div.card {
 
     flex-shrink: 0;
 
-    text-shadow: 2px 2px #000000;
+    text-shadow: 1px 1px #000000;
 
     user-select: none;
 }
@@ -173,6 +204,8 @@ div.card.thicc {
     height: 200px;
     
     border-radius: 4px;
+
+    text-shadow: 2px 2px #000000;
 }
 
 div.card.thicc p.card-value {

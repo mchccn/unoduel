@@ -3,6 +3,8 @@ import { Card } from "./types";
 
 export const deck = shuffle(createDeck());
 
+export const played = [] as Card[];
+
 export function createDeck() {
     const deck = [] as Card[];
 
@@ -34,10 +36,18 @@ export function shuffle(deck: Card[]) {
     return deck;
 }
 
-export function draw(deck: Card[]) {
-    const card = deck.shift();
+export function draw() {
+    let card = deck.shift();
 
-    if (!card) return false;
+    if (!card) {
+        deck.length = 0;
+
+        deck.push(...shuffle(played));
+
+        played.length = 0;
+    }
+
+    card = deck.shift()!;
 
     return card;
 }
