@@ -30,4 +30,8 @@ export function setup() {
 
         updatePlayers();
     });
+
+    document.querySelector(".switch-button")!.addEventListener("click", () => {
+        state.switching = false;
+    });
 }

@@ -32,9 +32,12 @@ export function init() {
             <div class="card-container">
                 <div class="card-container-pad"></div>
             </div>
-            <div class="cover"></div>
         </section>
     </main>
+
+    <div class="switch-cover">
+        <button class="switch-button">Click to continue the game</button>
+    </div>
 </div>
     `,
                 "text/html"
@@ -80,6 +83,10 @@ body {
     border: 1px solid #f4f4f4;
 
     border-radius: 2px;
+
+    position: relative;
+
+    overflow: hidden;
 }
 
 .duel-container {
@@ -112,6 +119,13 @@ body {
 
 .draw-button {
     width: 140px;
+    padding: 0.25rem 0.5rem;
+    
+    cursor: pointer;
+}
+
+.switch-button {
+    width: 200px;
     padding: 0.25rem 0.5rem;
     
     cursor: pointer;
@@ -169,6 +183,31 @@ body {
     width: 70px;
 
     flex-shrink: 0;
+}
+
+.switch-cover {
+    background: #fbfbfb;
+
+    display: grid;
+    place-items: center;
+
+    opacity: 0;
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 798px;
+    height: 298px;
+
+    pointer-events: none;
+}
+
+.switch-cover.enabled {
+    opacity: 1;
+
+    pointer-events: auto;
 }
 
 /* CSS to render cards */

@@ -11,7 +11,7 @@ export function play(card: Card) {
 
     if (last.color !== "rainbow" && last.color !== card.color && card.color !== "rainbow" && last.value !== card.value) return false;
 
-    if (card.value !== "reverse") players.turn = (players.turn + 1) % PLAYER_COUNT;
+    players.turn = (((players.turn + (state.reversed ? -1 : 1)) % PLAYER_COUNT) + PLAYER_COUNT) % PLAYER_COUNT;
 
     played.push(card);
 
@@ -33,6 +33,8 @@ export function updatePlayers() {
                     const el = createCardElement(card.color, card.value);
 
                     el.addEventListener("click", () => {
+                        const turn = players.turn;
+
                         if (play(card)) {
                             deck.splice(i, 1);
 
@@ -42,12 +44,16 @@ export function updatePlayers() {
 
                             if (!deck.length) {
                                 //@ts-ignore
-                                state.card = {
+                                return (state.card = {
                                     color: "placeholder",
                                     value: `Player ${n + 1} wins!`,
-                                } as Card;
+                                } as Card);
                             }
+
+                            if (turn !== players.turn) state.switching = true;
                         }
+
+                        return;
                     });
 
                     return el;

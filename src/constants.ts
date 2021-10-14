@@ -1,5 +1,6 @@
 import { draw } from "./deck";
 import { players } from "./players";
+import { state } from "./state";
 
 export const CARD_TYPES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "reverse", "skip", "draw2"] as const;
 
@@ -8,11 +9,14 @@ export const CARD_VALUES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "reverse", "skip", "dr
 export const CARD_COLORS = ["red", "yellow", "green", "blue"] as const;
 
 export const CARD_ACTIONS = {
-    reverse: () => players.reverse(),
+    reverse: () => {
+        state.reversed = !state.reversed;
+        players.turn = (((players.turn + (state.reversed ? -1 : 1)) % PLAYER_COUNT) + PLAYER_COUNT) % PLAYER_COUNT;
+    },
     skip: () => (players.turn = (players.turn + 1) % PLAYER_COUNT),
-    draw2: () => players[players.turn].push(draw(), draw()),
+    draw2: () => players[players.turn].unshift(draw(), draw()),
     wild: () => void 0,
-    wild4: () => players[players.turn].push(draw(), draw(), draw(), draw()),
+    wild4: () => players[players.turn].unshift(draw(), draw(), draw(), draw()),
 } as const;
 
 export const PLAYER_COUNT = 2;
